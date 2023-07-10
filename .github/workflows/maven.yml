@@ -29,7 +29,7 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 180.150.207.73:5000
 
     - name: Build and tag Docker image
-      run: docker build -t 180.150.207.73:5000/myapp:1.1 .
+      run: docker build -t 180.150.207.73:5000/myapp:1.2 .
 
     - name: Push Docker image to registry
-      run: docker push 180.150.207.73:5000/myapp:1.1
+      run: docker push 180.150.207.73:5000/myapp:1.2
