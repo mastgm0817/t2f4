@@ -11,7 +11,7 @@ public class T2f4Application {
 
 	@GetMapping("/welcome")
 	public String welcome(){
-		return "welcome to myworld";
+		return "Goodbye! I will go home";
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(T2f4Application.class, args);
