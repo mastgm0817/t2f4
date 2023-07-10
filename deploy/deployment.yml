@@ -16,4 +16,4 @@ spec:
       - name: myapp-pod
         image: 180.150.207.73:5000/myapp:1.0
         ports:
-        - containerPort: 80
+        - containerPort: 8080
