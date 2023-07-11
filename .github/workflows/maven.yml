@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -27,9 +26,7 @@ jobs:
         sudo systemctl restart docker
     - name: Login to Docker registry
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 180.150.207.73:5000
-
-    # - name: Build and tag Docker image
-    #   run: docker buildx build --push --tag 180.150.207.73:5000/myapp:latest .
-
-    - name: Push Docker image to registry
-      run: docker buildx build --push --tag 180.150.207.73:5000/myapp:${{ github.sha }} .
+    - name: Build and Push Docker image
+      run: |
+        docker build -t 180.150.207.73:5000/myapp:${{ github.sha }} .
+        docker push 180.150.207.73:5000/myapp:${{ github.sha }}
