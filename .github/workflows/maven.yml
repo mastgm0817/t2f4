@@ -33,6 +33,6 @@ jobs:
         context: .
         push: true
         tags: |
-          180.150.207.73:5000/myapp1:${{ github.sha }}
-          180.150.207.73:5000/myapp1:latest
+          180.150.207.73:5000/myapp:${{ github.sha }}
+          180.150.207.73:5000/myapp:latest
 
