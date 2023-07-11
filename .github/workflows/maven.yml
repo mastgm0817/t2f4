@@ -33,11 +33,9 @@ jobs:
 
     - name: Update deployment.yml
       run: |
-        git config --global user.name "mastgm0817"
-        git config --global user.email "mastgm0817@gmail.com"
+        git config --global user.email "GitHub Actions Bot@github.com"
+        git config --global user.name "GitHub Actions Bot"
         sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' ${{ github.workspace }}/deploy/deployment.yml
         git add ${{ github.workspace }}/deploy/deployment.yml
         git commit -m "Update deployment.yml"
-        git push origin HEAD:${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        git push origin master
