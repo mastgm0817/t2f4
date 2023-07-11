@@ -34,7 +34,7 @@ jobs:
     - name: Build and Push Docker image
       run: |
         docker buildx build --push --tag 180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER} .
-    - name: update manifest file
+    - name: update manifest files
       run: |
         sed -i "s|180.150.207.73:5000/myapp1:{{VERSION}}|180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER}|g" deploy/deployment.yml
     - name: Commit and push changes
