@@ -28,5 +28,5 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 180.150.207.73:5000
     - name: Build and Push Docker image
       run: |
-        docker build -t 180.150.207.73:5000/myapp:latest .
-        docker push 180.150.207.73:5000/myapp:latest
+        docker build -t 180.150.207.73:5000/myapp:${GITHUB_RUN_NUMBER} .
+        docker push 180.150.207.73:5000/myapp:${GITHUB_RUN_NUMBER}
