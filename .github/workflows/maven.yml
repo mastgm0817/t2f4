@@ -35,7 +35,7 @@ jobs:
         tags: |
           180.150.207.73:5000/myapp:${{ github.sha }}
           180.150.207.73:5000/myapp:latest
-    - name: Update deployment.yaml
-      run: |
-        sed -i "s|image: 180.150.207.73:5000/myapp:.+|image: 180.150.207.73:5000/myapp:${{ github.sha }}|g" ../../deploy/deployment.yml
+    # - name: Update deployment.yaml
+    #   run: |
+    #     sed -i "s|image: 180.150.207.73:5000/myapp:.+|image: 180.150.207.73:5000/myapp:${{ github.sha }}|g" ../../deploy/deployment.yml
 
