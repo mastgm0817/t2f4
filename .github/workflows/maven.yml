@@ -20,6 +20,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
+    - name: Store build number
+      id: store_build_number
+      run: echo "::set-output name=build_number::${{ github.run_number }}"
     - name: Configure Docker daemon
       run: |
         echo '{ "insecure-registries": ["180.150.207.73:5000"] }' | sudo tee /etc/docker/daemon.json
