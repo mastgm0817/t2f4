@@ -32,7 +32,7 @@ jobs:
         docker push 180.150.207.73:5000/myapp:${GITHUB_RUN_NUMBER}
     - name: Update deployment.yaml
       run: |
-        sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' deploy/deployment.yml
+        sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' deployment.yml
     - name: Commit and push changes
       run: |
         git config --global user.name "rhquddus"
