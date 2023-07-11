@@ -21,11 +21,6 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
 
-    - name: Checkout deployment directory
-      uses: actions/checkout@v3
-      with:
-        path: deploy
-
     - name: Configure Docker daemon
       run: |
         echo '{ "insecure-registries": ["180.150.207.73:5000"] }' | sudo tee /etc/docker/daemon.json
@@ -35,6 +30,8 @@ jobs:
     - name: Build and Push Docker image
       run: |
         docker buildx build --push --tag 180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER} .
+    - name: find current working path
+      run: pwd
     - name: Update manifest files
       run: |
         sed -i "s|180.150.207.73:5000/myapp1:{{VERSION}}|180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER}|g" deploy/deployment.yml
