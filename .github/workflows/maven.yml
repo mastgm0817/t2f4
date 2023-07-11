@@ -34,11 +34,11 @@ jobs:
       run: pwd
     - name: Update manifest files
       run: |
-        sed -i "s|180.150.207.73:5000/myapp1:{{VERSION}}|180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER}|g" deploy/deployment.yml
+        sed -i "s|180.150.207.73:5000/myapp1:{{VERSION}}|180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER}|g" ${{ github.workspace }}/deploy/deployment.yml
     - name: Commit and push changes
       run: |
         git config --global user.name "mastgm0817"
         git config --global user.email "mastgm0817@gmail.com"
-        git add deploy/deployment.yml
+        git add ${{ github.workspace }}/deploy/deployment.yml
         git commit -m "Update manifest file with build ${{ github.run_number }}"
         git push
