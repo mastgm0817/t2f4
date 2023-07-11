@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myapp-pod
-        image: 180.150.207.73:5000/myapp
+        image: 180.150.207.73:5000/myapp1:{{VERSION}}
         ports:
         - containerPort: 8080
 ---
@@ -29,4 +29,4 @@ spec:
   ports:
   - port: 80
     targetPort: 8080
-    nodePort: 32000
+    nodePort: 33000

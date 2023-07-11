@@ -20,6 +20,11 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        path : deploy
     - name: Configure Docker daemon
       run: |
         echo '{ "insecure-registries": ["180.150.207.73:5000"] }' | sudo tee /etc/docker/daemon.json
@@ -28,13 +33,15 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 180.150.207.73:5000
     - name: Build and Push Docker image
       run: |
-        docker buildx build --push --tag 180.150.207.73:5000/myapp:latest .
-        docker rmi 180.150.207.73:5000/myapp:latest
-    # - name: Update deployment.yml
-    #   run: |
-    #     git config --global user.email "GitHub Actions Bot@github.com"
-    #     git config --global user.name "GitHub Actions Bot"
-    #     sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' ${{ github.workspace }}/deploy/deployment.yml
-    #     git add ${{ github.workspace }}/deploy/deployment.yml
-    #     git commit -m "Update deployment.yml"
-    #     git push origin master
+        docker buildx build --push --tag 180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER} .
+    - name: update manifest file
+      run: |
+        sed -i "s|180.150.207.73:5000/myapp1:{{VERSION}}|180.150.207.73:5000/myapp1:${GITHUB_RUN_NUMBER}|g" deploy/deployment.yml
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "mastgm0817"
+        git config --global user.email "mastgm0817@gmail.com"
+        git add deploy/deployment.yml
+        git commit -m "Update manifest file with build ${{ github.run_number }}"
+        git push
+
