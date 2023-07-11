@@ -28,14 +28,12 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 180.150.207.73:5000
     - name: Build and Push Docker image
       run: |
-        docker build -t 180.150.207.73:5000/myapp:${GITHUB_RUN_NUMBER} .
-        docker push 180.150.207.73:5000/myapp:${GITHUB_RUN_NUMBER}
-
-    - name: Update deployment.yml
-      run: |
-        git config --global user.email "GitHub Actions Bot@github.com"
-        git config --global user.name "GitHub Actions Bot"
-        sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' ${{ github.workspace }}/deploy/deployment.yml
-        git add ${{ github.workspace }}/deploy/deployment.yml
-        git commit -m "Update deployment.yml"
-        git push origin master
+        docker buildx build --push --tag 180.150.207.73:5000/myapp:latest .
+    # - name: Update deployment.yml
+    #   run: |
+    #     git config --global user.email "GitHub Actions Bot@github.com"
+    #     git config --global user.name "GitHub Actions Bot"
+    #     sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' ${{ github.workspace }}/deploy/deployment.yml
+    #     git add ${{ github.workspace }}/deploy/deployment.yml
+    #     git commit -m "Update deployment.yml"
+    #     git push origin master
