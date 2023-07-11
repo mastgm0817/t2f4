@@ -33,7 +33,7 @@ jobs:
 
     - name: Update deployment.yml
       run: |
-        git config --global user.name "mastgm0817"
+        git config --global user.name "rhquddus"
         git config --global user.email "rhquddus@naver.com"
         sed -i 's/myapp:{{VERSION}}/myapp:${GITHUB_RUN_NUMBER}/g' ${{ github.workspace }}/deploy/deployment.yml
         git add ${{ github.workspace }}/deploy/deployment.yml
